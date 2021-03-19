@@ -4,6 +4,7 @@ from flask_jwt import JWT, current_identity
 from typing import *
 from datetime import timedelta
 from db import db
+import os
 
 from security import authenticate, identity
 from resources.user import UserRegiser
@@ -16,7 +17,7 @@ app.config['JWT_SECRET_KEY'] = "SECRET_KEY"
 app.config['JWT_EXPIRATION_DELTA'] = timedelta(seconds=3600)
 app.config['JWT_AUTH_URL_RULE'] = '/login'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///data.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
 
 api = Api(app)
 
