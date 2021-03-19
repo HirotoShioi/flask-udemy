@@ -18,10 +18,6 @@ app.config['JWT_AUTH_URL_RULE'] = '/login'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///data.db"
 
-@app.before_first_request
-def create_tables() -> None:
-    db.create_all()
-
 api = Api(app)
 
 jwt = JWT(app, authenticate, identity) # /auth
